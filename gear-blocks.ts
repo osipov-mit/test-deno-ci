@@ -1,5 +1,3 @@
-#! /usr/bin/env deno run --allow-all --unstable
-
 import { assert } from 'https://deno.land/std@0.168.0/testing/asserts.ts';
 import { ApiPromise, WsProvider } from 'npm:@polkadot/api';
 import { u32 } from 'npm:@polkadot/types-codec';
@@ -37,7 +35,9 @@ const api = await ApiPromise.create({
     ],
   },
 });
+
 let blockNumber = (await api.query.gear.blockNumber()) as u32;
+
 setTimeout(() => {
   api.rpc.chain.subscribeNewHeads(async () => {
     const bn = (await api.query.gear.blockNumber()) as u32;
