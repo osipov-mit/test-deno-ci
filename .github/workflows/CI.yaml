@@ -1,0 +1,22 @@
+name: Run gear blocks test
+
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1.1.0
+        with:
+          deno-version: v1.x
+
+      - name: run test
+        run: deno run --allow-all --unstable gear-blocks.ts wss://node-workshop.gear.rs
